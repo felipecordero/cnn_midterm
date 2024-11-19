@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Networks Summary</title>
+</head>
+<body>
+    <h1>Summary of Chapter 1</h1>
+
+    <h2>Introduction to Neural Networks (NNs)</h2>
+    <p>
+        Neural Networks (NNs) are central to Artificial Intelligence (AI) and Deep Learning (DL).
+    </p>
+    <ul>
+        <li>Applications span:
+            <ul>
+                <li>Computer vision: pattern recognition, image classification, segmentation.</li>
+                <li>Speech recognition and synthesis.</li>
+                <li>Natural Language Processing (NLP).</li>
+                <li>Robotics, gaming, and self-driving cars.</li>
+            </ul>
+        </li>
+        <li>NNs often achieve state-of-the-art performance, surpassing traditional machine learning methods.</li>
+    </ul>
+
+    <h2>Biological Inspiration</h2>
+    <p>
+        The human brain's structure inspires NNs:
+    </p>
+    <ul>
+        <li>Dendrites receive input, signals are processed in the soma, and outputs are transmitted via a single axon.</li>
+        <li>Connections (weights) between neurons determine learning and memory:
+            <pre>w_{x &rarr; y}</pre>
+        </li>
+        <li>Repeated activation of one neuron by another strengthens the synaptic weight.</li>
+    </ul>
+
+    <h2>Core Concepts in Neural Networks</h2>
+    <h3>Connectionist Machines</h3>
+    <ul>
+        <li>NNs mimic brain-like connectionist architecture.</li>
+        <li>Learning algorithms adjust the weights of connections:
+            <pre>New weight = Old weight + (Input × Error)</pre>
+        </li>
+    </ul>
+
+    <h3>Perceptrons</h3>
+    <p>The perceptron model forms the basis of modern neural networks:</p>
+    <pre>z = Σ(w_i · x_i) + b</pre>
+    <p>Where:</p>
+    <ul>
+        <li>w_i: Weight for each input x_i.</li>
+        <li>b: Bias term.</li>
+    </ul>
+    <p>The perceptron "fires" if:</p>
+    <pre>z ≥ 0 &rarr; Output = 1</pre>
+    <p>Otherwise:</p>
+    <pre>z < 0 &rarr; Output = 0</pre>
+    <p>Boolean Logic: Perceptrons can model AND, OR, and NOT gates but not XOR without additional layers.</p>
+
+    <h2>Multi-Layer Perceptrons (MLPs)</h2>
+    <ul>
+        <li>MLPs use multiple layers to handle complex functions.</li>
+        <li>A single hidden layer can model any Boolean function.</li>
+        <li>MLPs are universal approximators of Boolean and classification functions.</li>
+    </ul>
+
+    <h2>Boolean Representation and Optimization</h2>
+    <p>Boolean functions are expressed in Disjunctive Normal Form (DNF) to reduce complexity.</p>
+    <p>Network size can be minimized by reducing DNF terms.</p>
+
+    <h2>Deep Networks vs. Shallow Networks</h2>
+    <ul>
+        <li>Deeper networks require fewer neurons than wide, shallow networks.</li>
+        <li>Deeper networks are more expressive:</li>
+        <ul>
+            <li>They can compose more complex functions and boundaries with fewer resources.</li>
+        </ul>
+    </ul>
+
+    <h2>Composing Decision Boundaries</h2>
+    <ul>
+        <li>MLPs can model arbitrarily complex boundaries:</li>
+        <ul>
+            <li>Combinations of shapes (e.g., circles, polygons).</li>
+            <li>Example: To model a circle:</li>
+        </ul>
+        <pre>
+        Sum inside circle = N, 
+        Sum outside circle = N/2
+        </pre>
+    </ul>
+
+    <h2>Key Takeaways</h2>
+    <ol>
+        <li>Universal Classifiers: Even a single hidden-layer MLP is a universal classifier.</li>
+        <li>Trade-offs: Depth and width are balanced based on problem complexity.</li>
+        <li>Expressiveness: Deeper networks allow exponentially smaller architectures for the same task.</li>
+    </ol>
+</body>
+</html>

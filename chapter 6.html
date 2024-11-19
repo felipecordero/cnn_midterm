@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Network Fundamentals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        strong {
+            color: #d9534f;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        code {
+            background-color: #e9ecef;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chapter 6: Neural Network Fundamentals</h1>
+
+    <h2>Divergence</h2>
+    <ul>
+        <li><strong>Divergence</strong> measures how different the model's predictions are from the actual values. Common types:
+            <ul>
+                <li><strong>L2 divergence</strong>: Used for <strong>numeric prediction</strong> (regression). Measures the <strong>squared difference</strong> between predicted and actual values.</li>
+                <li><strong>KL divergence</strong>: Used for <strong>classification tasks</strong>. Measures the difference between two probability distributions.</li>
+            </ul>
+        </li>
+        <li>In regression models with <strong>linear output layers</strong> and L2 divergence, as well as classification models with <strong>softmax output layers</strong> and KL divergence, the <strong>gradient</strong> is the <strong>error</strong> (y - d), termed as <strong>error backpropagation</strong>.</li>
+    </ul>
+
+    <h2>Covariate Shift Problem</h2>
+    <ul>
+        <li><strong>Covariate shift</strong> happens when the data distribution changes between minibatches during training, leading to instability.
+            <ul>
+                <li>To solve this, apply <strong>Mini Batch Normalization</strong>:</li>
+                <li>Normalize batches to have a <strong>mean of 0</strong> and <strong>unit standard deviation</strong>, then shift to the appropriate location.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Mini Batch Normalization</h2>
+    <ul>
+        <li><strong>Batch Normalization (BN)</strong> standardizes inputs to each layer, stabilizing and speeding up training.
+            <ul>
+                <li>Applied <strong>after weighted sum</strong> but <strong>before activation</strong>.</li>
+                <li>Improves <strong>convergence rate</strong> and overall performance by reducing internal covariate shift.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Overfitting and Regularization</h2>
+    <ul>
+        <li><strong>Overfitting</strong>: When the network memorizes the training data rather than generalizing features.
+            <ul>
+                <li><strong>Weight Regularization</strong>: Reduces overfitting by penalizing large weights. The parameter <strong>&lambda;</strong> controls this effect.</li>
+                <li><strong>Dropout</strong>: Randomly turns off neurons during training to reduce co-dependency.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Variations of Dropout</h2>
+    <ul>
+        <li><strong>Zoneout</strong>: Keeps selected units unchanged in <strong>RNNs</strong>.</li>
+        <li><strong>Dropconnect</strong>: Drops individual <strong>connections</strong> instead of entire nodes.</li>
+        <li><strong>Shakeout</strong> and <strong>Whiteout</strong>: Introduce random noise to modify weights and connections.</li>
+    </ul>
+
+    <h2>Additional Heuristics for Training</h2>
+    <ul>
+        <li><strong>Early Stopping</strong>: Stops training when validation set performance degrades to prevent overfitting.</li>
+        <li><strong>Gradient Clipping</strong>: Sets a <strong>maximum value</strong> for gradients to avoid instability.</li>
+        <li><strong>Data Augmentation</strong>: Increases training data by transforming examples (e.g., rotation, noise).</li>
+        <li><strong>Normalize Inputs</strong>: Normalize the training dataset to <strong>mean 0</strong> and <strong>unit variance</strong>.</li>
+    </ul>
+
+    <h2>Setting up a Neural Network Training</h2>
+    <ol>
+        <li><strong>Training Data</strong>: Obtain the data and use the correct representation for inputs and outputs.</li>
+        <li><strong>Network Architecture</strong>: Design the network with the appropriate number of neurons and layers.</li>
+        <li><strong>Divergence Function</strong>: Choose between L2 or KL divergence.</li>
+        <li><strong>Regularization and Heuristics</strong>: Apply techniques like batch normalization and dropout.</li>
+        <li><strong>Optimization Algorithm</strong>: Use optimizers like <strong>ADAM</strong> and tune hyperparameters.</li>
+        <li><strong>Training and Evaluation</strong>: Evaluate the model on a validation set and apply early stopping if needed.</li>
+    </ol>
+
+</body>
+</html>

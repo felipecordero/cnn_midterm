@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Network Fundamentals Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        strong {
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <h2>Chapter 4: Neural Network Fundamentals - Structured Summary</h2>
+    
+    <h3>1. <strong>Problem Setup</strong></h3>
+    <ul>
+        <li>The goal is to train a neural network given a set of <strong>input-output pairs</strong>.</li>
+        <li><strong>Loss function</strong> is used to evaluate the performance of the model, and the objective is to minimize this loss using <strong>gradient descent</strong>.</li>
+    </ul>
+
+    <h3>2. <strong>Notation</strong></h3>
+    <ul>
+        <li>The <strong>input layer</strong> is referred to as the <strong>0th layer</strong>.</li>
+        <li>The output of the <strong>i-th neuron in the k-th layer</strong> is represented by specific notations.</li>
+        <li><strong>Weights and biases</strong> are represented between connections of neurons from different layers.</li>
+    </ul>
+
+    <h3>3. <strong>Overall Gradient Descent Algorithm</strong></h3>
+    <ul>
+        <li><strong>Initialize parameters</strong> (weights and biases).</li>
+        <li><strong>Update weights</strong> iteratively using <strong>gradient descent</strong> until the <strong>loss converges</strong>.</li>
+    </ul>
+
+    <h3>4. <strong>Forward Pass</strong></h3>
+    <ul>
+        <li>Involves passing the input through the network layer by layer to get the final output.</li>
+        <li><strong>Affine functions</strong> (linear transformations) and <strong>activation functions</strong> are applied in each layer.</li>
+        <li><strong>Bias terms</strong> are treated similarly to weights and added to each neuron's output.</li>
+    </ul>
+
+    <h3>5. <strong>Computing Derivatives</strong></h3>
+    <ul>
+        <li><strong>Divergence</strong> between the output of the network and the <strong>desired output</strong> is calculated to compute loss.</li>
+        <li>Gradients are computed to minimize this loss. The process involves:
+            <ol>
+                <li>Calculating the <strong>derivative of the loss</strong> with respect to the final output.</li>
+                <li>Using the <strong>chain rule</strong> to propagate the gradient back through each layer.</li>
+                <li>Calculating the gradient for <strong>weights and biases</strong> in each layer.</li>
+            </ol>
+        </li>
+    </ul>
+
+    <h3>6. <strong>Backward Pass (Backpropagation)</strong></h3>
+    <ul>
+        <li>This is the process of calculating the <strong>gradient of the loss</strong> with respect to each parameter (weights and biases).</li>
+        <li>The <strong>gradient</strong> is propagated backward through the network from the output layer to the input layer.</li>
+        <li>The <strong>derivative of the loss</strong> at each layer is used to update the parameters in the previous layers.</li>
+    </ul>
+
+    <h3>7. <strong>Special Cases</strong></h3>
+    <ul>
+        <li><strong>Vector Activations</strong>: When using vector activations, each neuron’s activation influences multiple outputs.</li>
+        <li><strong>Scalar Activations</strong>: Each neuron's activation influences a single output.</li>
+        <li><strong>ReLU Activation</strong>: Non-differentiability at <strong>z = 0</strong> is handled by choosing subgradients:
+            <ul>
+                <li>For <strong>z > 0</strong>, the gradient is <strong>1</strong>.</li>
+                <li>For <strong>z < 0</strong>, the gradient is <strong>0</strong>.</li>
+                <li>At <strong>z = 0</strong>, a subgradient is typically <strong>0</strong>.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>8. <strong>Softmax Activation Function</strong></h3>
+    <ul>
+        <li><strong>Softmax</strong> is used in the output layer for multi-class classification.</li>
+        <li>The <strong>Kronecker delta</strong> is used to express partial derivatives in softmax calculations.</li>
+    </ul>
+
+    <h3>9. <strong>Vector Formulation</strong></h3>
+    <ul>
+        <li>To simplify the computation, the entire process is expressed in terms of <strong>vector operations</strong>.</li>
+        <li><strong>Weights are matrices</strong>, and <strong>inputs/outputs are vectors</strong>.</li>
+        <li>This vectorized approach is efficient and leverages <strong>fast matrix libraries</strong>.</li>
+    </ul>
+
+    <h3>10. <strong>Vectorized Forward and Backward Pass</strong></h3>
+    <ul>
+        <li>The <strong>forward pass</strong> involves applying affine transformations and activation functions in vector form.</li>
+        <li>The <strong>backward pass</strong> uses the <strong>Jacobian matrix</strong> to represent partial derivatives:
+            <ul>
+                <li>For <strong>scalar activations</strong>, the Jacobian is <strong>diagonal</strong>.</li>
+                <li>For <strong>vector activations</strong>, the Jacobian is a <strong>full matrix</strong>.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>11. <strong>Chain Rule for Backpropagation</strong></h3>
+    <ul>
+        <li>The <strong>chain rule</strong> is extensively used to propagate the gradient through nested functions in the network.</li>
+        <li>Each layer’s gradient is computed based on the previous layer’s outputs and weights.</li>
+    </ul>
+
+    <h3>12. <strong>Special Case - Non-differentiability (Max Functions)</strong></h3>
+    <ul>
+        <li>For <strong>max functions</strong> (common in <strong>CNNs</strong>), the gradient flows through the input with the maximum value.</li>
+        <li>For all other inputs in the region, the gradient is <strong>0</strong>.</li>
+    </ul>
+
+    <h3>13. <strong>Overall Approach</strong></h3>
+    <ul>
+        <li>The entire process of training a neural network can be summarized as:
+            <ol>
+                <li><strong>Forward pass</strong> to compute the network output.</li>
+                <li><strong>Backward pass</strong> to compute the gradients of the loss with respect to each parameter.</li>
+                <li><strong>Parameter updates</strong> using the computed gradients.</li>
+            </ol>
+        </li>
+    </ul>
+
+    <h3><strong>Key Terms to Remember</strong></h3>
+    <ul>
+        <li><strong>Gradient Descent</strong>: Optimization technique used to minimize the loss function.</li>
+        <li><strong>Backpropagation</strong>: Method to compute the gradient of the loss with respect to each parameter.</li>
+        <li><strong>Chain Rule</strong>: Fundamental tool used for gradient computation in deep networks.</li>
+        <li><strong>ReLU</strong>: Activation function with a non-differentiable point at <strong>0</strong>.</li>
+        <li><strong>Jacobian</strong>: Matrix representing the derivative of a vector-valued function.</li>
+    </ul>
+
+    <p>This summary should help in understanding the <strong>core principles of neural network training</strong>, focusing on the <strong>forward and backward passes</strong>, <strong>gradient calculations</strong>, and handling special cases like <strong>non-differentiability</strong>. Make sure to revisit <strong>key equations</strong> and understand the <strong>chain rule</strong> application for effective gradient propagation.</p>
+</body>
+</html>

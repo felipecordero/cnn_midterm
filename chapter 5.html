@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Network Fundamentals Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 20px;
+        }
+        h2 {
+            color: #005f99;
+        }
+        .equation {
+            background-color: #e8f0fe;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Neural Network Fundamentals</h2>
+    <h3>1. Neural Networks as Universal Approximators</h3>
+    <p>Neural networks can approximate any function. <span class="bold">Training</span> involves learning the <span class="bold">weights</span> and <span class="bold">biases</span> to minimize the <span class="bold">loss function</span> on the training set. Training is achieved through <span class="bold">gradient descent</span>, where the <span class="bold">gradient of the error</span> is computed using <span class="bold">backpropagation</span>.</p>
+
+    <h3>2. Gradient Descent and Backpropagation</h3>
+    <p>The general <span class="bold">Gradient Descent Update Rule</span> is:</p>
+    <div class="equation">
+        w<sub>t+1</sub> = w<sub>t</sub> - &eta; &nabla; L(w<sub>t</sub>)
+    </div>
+    <p>Where:</p>
+    <ul>
+        <li>w<sub>t</sub> represents the weights at iteration t.</li>
+        <li>&eta; is the <span class="bold">learning rate</span>.</li>
+        <li>&nabla; L(w<sub>t</sub>) is the <span class="bold">gradient</span> of the loss function L at w<sub>t</sub>.</li>
+    </ul>
+
+    <h3>3. Loss Surface Characteristics</h3>
+    <p>For <span class="bold">large networks</span>, <span class="bold">saddle points</span> are more common than local minima, making gradient descent prone to getting "stuck." <span class="bold">Convex optimization</span> involves a continuously curving upward surface that simplifies finding an optimal solution.</p>
+
+    <h3>4. Convergence in Gradient Descent</h3>
+    <p><span class="bold">Convergence</span> is achieved when the gradient reaches zero, but there can be <span class="bold">jitter</span> or <span class="bold">divergence</span>. For <span class="bold">quadratic surfaces</span>, convergence depends on the step size:</p>
+    <ul>
+        <li><span class="bold">Too small</span> a step leads to slow convergence.</li>
+        <li><span class="bold">Too large</span> a step causes oscillation or divergence.</li>
+    </ul>
+    <p>Using <span class="bold">Newton's Method</span>, the optimal step size for quadratic optimization can be found as follows:</p>
+    <div class="equation">
+        w<sub>t+1</sub> = w<sub>t</sub> - H<sup>-1</sup> &nabla; L(w<sub>t</sub>)
+    </div>
+    <p>Where H is the <span class="bold">Hessian matrix</span> of second-order partial derivatives of the loss function.</p>
+
+    <h3>5. Momentum and Nesterov's Accelerated Gradient (NAG)</h3>
+    <p><span class="bold">Momentum</span> helps maintain a running average of gradients to smooth out oscillations and improve convergence. The <span class="bold">Momentum Update Rule</span> is:</p>
+    <div class="equation">
+        v<sub>t</sub> = &beta; v<sub>t-1</sub> + (1 - &beta;) &nabla; L(w<sub>t</sub>)<br>
+        w<sub>t+1</sub> = w<sub>t</sub> - &eta; v<sub>t</sub>
+    </div>
+    <p>Where:</p>
+    <ul>
+        <li>v<sub>t</sub> is the <span class="bold">velocity</span> that accumulates past gradients.</li>
+        <li>&beta; is the <span class="bold">momentum coefficient</span>, typically between 0.9 and 0.99.</li>
+    </ul>
+    <p><span class="bold">Nesterov's Accelerated Gradient (NAG)</span> predicts the next position before calculating the gradient:</p>
+    <div class="equation">
+        v<sub>t</sub> = &beta; v<sub>t-1</sub> + (1 - &beta;) &nabla; L(w<sub>t</sub> - &eta; &beta; v<sub>t-1</sub>)<br>
+        w<sub>t+1</sub> = w<sub>t</sub> - &eta; v<sub>t</sub>
+    </div>
+
+    <h3>6. Stochastic Gradient Descent (SGD) and Variants</h3>
+    <p><span class="bold">SGD</span> updates the model parameters using a single training instance at each step. It is faster but has <span class="bold">high variance</span>. <span class="bold">Mini-batch Gradient Descent</span> uses small, randomly selected subsets of data, which balances the speed of SGD with the stability of batch gradient descent.</p>
+
+    <h3>7. Adaptive Learning Rate Methods</h3>
+    <p><span class="bold">RMSprop</span> adjusts the learning rate based on a running estimate of the gradient's variance:</p>
+    <div class="equation">
+        E[g^2]<sub>t</sub> = &gamma; E[g^2]<sub>t-1</sub> + (1 - &gamma;) (&nabla; L(w<sub>t</sub>))^2<br>
+        w<sub>t+1</sub> = w<sub>t</sub> - \( \frac{\eta}{\sqrt{E[g^2]_t + \epsilon}} \) &nabla; L(w<sub>t</sub>)
+    </div>
+    <p><span class="bold">ADAM</span> combines momentum and RMSprop:</p>
+    <div class="equation">
+        m<sub>t</sub> = &beta;<sub>1</sub> m<sub>t-1</sub> + (1 - &beta;<sub>1</sub>) &nabla; L(w<sub>t</sub>)<br>
+        v<sub>t</sub> = &beta;<sub>2</sub> v<sub>t-1</sub> + (1 - &beta;<sub>2</sub>) (&nabla; L(w<sub>t</sub>))^2<br>
+        \( \hat{m}_t = \frac{m_t}{1 - \beta_1^t} \), \( \hat{v}_t = \frac{v_t}{1 - \beta_2^t} \)<br>
+        w<sub>t+1</sub> = w<sub>t</sub> - \( \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon} \) \hat{m}_t
+    </div>
+
+    <h3>8. Key Takeaways for Convergence</h3>
+    <ul>
+        <li><span class="bold">Gradient Descent</span> can miss optimal solutions, which can sometimes be beneficial.</li>
+        <li><span class="bold">Adaptive learning rates</span> and <span class="bold">normalization</span> across dimensions can improve convergence.</li>
+        <li><span class="bold">Momentum methods</span> prioritize directions with steady improvement while de-emphasizing unstable directions.</li>
+    </ul>
+
+    <h2>Mathematical Highlights</h2>
+    <h3>Quadratic Objective Functions</h3>
+    <p><span class="bold">Optimal Step Size</span>: The step size for minimizing a quadratic function can be computed directly using <span class="bold">Newton's Method</span>.</p>
+
+    <h3>Convergence Issues and Solutions</h3>
+    <p><span class="bold">Solution for Convergence Problem 1</span>: Normalize the objective function to have the same <span class="bold">eccentricity</span> in all directions.</p>
+    <p><span class="bold">Solution for Convergence Problem 2</span>: Use a <span class="bold">decaying learning rate</span>, which starts high and gradually decreases to ensure stable convergence.</p>
+
+    <h3>Momentum Update Equation</h3>
+    <p>At each iteration, compute:</p>
+    <ol>
+        <li><span class="bold">Gradient Step</span> at the current location.</li>
+        <li><span class="bold">Add Scaled Previous Step</span> (running average) to get the final step.</li>
+    </ol>
+
+    <h2>SGD vs. Batch Gradient Descent</h2>
+    <p><span class="bold">SGD</span>: Updates the model one instance at a time; high variance but <span class="bold">faster updates</span>.</p>
+    <p><span class="bold">Batch Gradient Descent</span>: Uses all training instances; <span class="bold">stable but slower</span>.</p>
+    <p><span class="bold">Mini-batch Gradient Descent</span>: Combines the benefits of both, using small batches for updates.</p>
+
+    <h2>Adaptive Optimization Algorithms</h2>
+    <p><span class="bold">RMSprop</span> adjusts learning rates individually for each parameter, using the <span class="bold">root mean square</span> of gradients.</p>
+    <p><span class="bold">ADAM</span> combines <span class="bold">momentum</span> with <span class="bold">RMSprop</span> for more robust performance, using running estimates for both the gradient and its square.</p>
+</body>
+</html>
